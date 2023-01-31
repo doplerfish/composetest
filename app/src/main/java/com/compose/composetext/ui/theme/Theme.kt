@@ -42,3 +42,8 @@ fun ComposeTestTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compo
         content = content
     )
 }
+
+@Composable
+fun EffectHandlersTheme(){
+
+}
