@@ -7,7 +7,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -41,6 +40,7 @@ import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
+import com.compose.composetext.ui.theme.spacing
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.*
@@ -76,6 +76,69 @@ fun MainScreen() {
 //    TouchableArch()
 //    ShowBottomTabsView()
 //    MultiSelectLazyColumn()
+    ShowThemeAttributes()
+}
+
+@Composable
+fun ShowThemeAttributes() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Column() {
+            Button(colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.primary
+            ), onClick = {}) {
+                Text(text = "Primary Color")
+            }
+
+            Button(colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.secondary
+            ), onClick = {}) {
+                Text(text = "Secondary Color")
+            }
+            Text(text = "Error color", color = MaterialTheme.colors.error)
+            Text(
+                text = "Background color",
+                Modifier.background(color = MaterialTheme.colors.background)
+            )
+
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+            Row() {
+                Text(text = "Small spacing:")
+                Spacer(
+                    modifier = Modifier
+                        .width(MaterialTheme.spacing.small)
+                        .height(20.dp)
+                        .background(color = MaterialTheme.colors.background)
+                )
+            }
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+
+            Row() {
+                Text(text = "Large spacing:")
+                Spacer(
+                    modifier = Modifier
+                        .width(MaterialTheme.spacing.large)
+                        .height(20.dp)
+                        .background(color = MaterialTheme.colors.background)
+                )
+            }
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+
+            Row() {
+                Text(text = "Extra large spacing:")
+                Spacer(
+                    modifier = Modifier
+                        .width(MaterialTheme.spacing.extraLarge)
+                        .height(20.dp)
+                        .background(color = MaterialTheme.colors.background)
+                )
+            }
+        }
+
+    }
 }
 
 @Composable

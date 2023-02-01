@@ -13,6 +13,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.lifecycle.lifecycleScope
 import com.compose.composetext.ui.theme.BottomNavigation
+import com.compose.composetext.ui.theme.ComposeTestTheme
 import com.compose.composetext.ui.theme.ShowBottomNavigation
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -26,11 +27,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-              MainScreen()
+            ComposeTestTheme {
+            MainScreen()
 //            EffectHandlers(effectViewModel = effectViewModel)
 //            MyComposable()
 //            Navigation()
 //            ShowBottomNavigation()
+            }
         }
     }
 }
