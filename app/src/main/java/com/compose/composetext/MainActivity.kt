@@ -26,19 +26,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//              MainScreen()
+              MainScreen()
 //            EffectHandlers(effectViewModel = effectViewModel)
 //            MyComposable()
 //            Navigation()
 //            ShowBottomNavigation()
-            //log("Hello")
         }
     }
-
-
-//    @Preview(showBackground = true)
-//    @Composable
-//    fun DefaultPreview(){
-//        MainScreen()
-//    }
 }
