@@ -12,6 +12,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.lifecycle.lifecycleScope
+import com.compose.composetext.ui.theme.BottomNavigation
+import com.compose.composetext.ui.theme.ShowBottomNavigation
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,15 +21,15 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
 
     private val effectViewModel: EffectViewModel by viewModels()
-    var i = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+//              MainScreen()
 //            EffectHandlers(effectViewModel = effectViewModel)
 //            MyComposable()
-
+//            Navigation()
+//            ShowBottomNavigation()
         }
     }
 

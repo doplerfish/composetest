@@ -7,9 +7,12 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -72,7 +75,93 @@ fun MainScreen() {
 //    ShowTimer()
 //    TouchableArch()
 //    ShowBottomTabsView()
+//    MultiSelectLazyColumn()
 }
+
+@Composable
+fun MultiSelectLazyColumn() {
+
+    var showOnlySelectedItems by remember {
+        mutableStateOf(false)
+    }
+
+    var myItems by remember {
+        mutableStateOf((1..20).map { index ->
+            MyListItem(
+                id = index,
+                title = "Item $index",
+                isSelected = false
+            )
+        })
+    }
+
+    var mySelectedItems by remember {
+        mutableStateOf(listOf<MyListItem>())
+    }
+
+    LaunchedEffect(key1 = myItems) {
+        mySelectedItems = myItems.filter { it.isSelected }
+    }
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        Spacer(modifier = Modifier.height(20.dp))
+        Row(modifier = Modifier.fillMaxWidth(), Arrangement.SpaceEvenly) {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (!showOnlySelectedItems) Color.Green else Color.LightGray
+                ), onClick = { showOnlySelectedItems = false }) {
+                Text(text = "All Items")
+            }
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (showOnlySelectedItems) Color.Green else Color.LightGray
+                ),
+                onClick = { showOnlySelectedItems = true }) {
+                Text(text = "Selected Items")
+            }
+        }
+
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+
+            val itemsToShow = if (showOnlySelectedItems) mySelectedItems else myItems
+            items(itemsToShow.size) {
+                val shownItem = itemsToShow[it]
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            myItems = myItems.mapIndexed { j, item ->
+                                if (shownItem.id == item.id) {
+                                    shownItem.copy(isSelected = !shownItem.isSelected)
+                                } else item
+                            }
+                        }
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(text = shownItem.title)
+                    if (shownItem.isSelected) {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = "Selected",
+                            tint = Color.Green,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+data class MyListItem(
+    val id: Int,
+    val title: String,
+    val isSelected: Boolean = false
+)
 
 @Composable
 fun ShowBottomTabsView() {
@@ -87,26 +176,30 @@ fun ShowBottomTabsView() {
         mutableStateOf(Screen("Home", Color.Green))
     }
 
-    LaunchedEffect(key1 = selectedTabIndex){
-        when (selectedTabIndex){
+    LaunchedEffect(key1 = selectedTabIndex) {
+        when (selectedTabIndex) {
             0 -> screen = Screen("Home", Color.Green)
             1 -> screen = Screen("Bookings", Color.Red)
             2 -> screen = Screen("Search", Color.Yellow)
             3 -> screen = Screen("Profile", Color.Blue)
         }
     }
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(screen.background)
-        .padding(bottom = 20.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(screen.background)
+            .padding(bottom = 20.dp)
 
     ) {
-        Text(modifier = Modifier
-            .align(Alignment.Center
-            ),
+        Text(
+            modifier = Modifier
+                .align(
+                    Alignment.Center
+                ),
             text = screen.title,
             fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,)
+            fontWeight = FontWeight.Bold,
+        )
     }
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -129,7 +222,9 @@ fun ShowBottomTabsView() {
                     text = "Profile"
                 )
             ),
-            modifier = Modifier.align(Alignment.BottomCenter).background(Color.White)
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .background(Color.White)
         ) { selectedIndex ->
             selectedTabIndex = selectedIndex
         }
