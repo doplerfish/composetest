@@ -17,6 +17,7 @@ import com.compose.composetext.ui.theme.ShowBottomNavigation
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 class MainActivity : ComponentActivity() {
 
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
 //            MyComposable()
 //            Navigation()
 //            ShowBottomNavigation()
+            //log("Hello")
         }
     }
 
