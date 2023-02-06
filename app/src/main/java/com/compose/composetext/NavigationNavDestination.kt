@@ -6,9 +6,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -68,7 +66,10 @@ fun SecondScreen(navigator: DestinationsNavigator, user: User) {
             Button(
                 onClick = {
                     navigator.navigate(FirstScreenDestination())
-                }, modifier = Modifier
+                }, modifier = Modifier,
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colors.secondary
+                )
             ) {
                 Text(text = "Hi ${user.name}, click to go back")
             }

@@ -35,7 +35,9 @@ class MainActivity : ComponentActivity() {
 //            MyComposable()
 //            Navigation()
 //            ShowBottomNavigation()
-                DestinationsNavHost(navGraph = NavGraphs.root)
+//            DestinationsNavHost(navGraph = NavGraphs.root)
+//            SupportDifferentScreenSizes()
+              MotionLayout()
             }
         }
     }
