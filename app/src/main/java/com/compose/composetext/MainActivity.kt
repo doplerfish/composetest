@@ -1,24 +1,26 @@
 package com.compose.composetext
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
-import androidx.lifecycle.lifecycleScope
-import com.compose.composetext.ui.theme.BottomNavigation
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 import com.compose.composetext.ui.theme.ComposeTestTheme
-import com.compose.composetext.ui.theme.ShowBottomNavigation
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlin.math.log
+import com.ramcosta.composedestinations.DestinationsNavHost
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
@@ -28,11 +30,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeTestTheme {
-            MainScreen()
+//            MainScreen()
 //            EffectHandlers(effectViewModel = effectViewModel)
 //            MyComposable()
 //            Navigation()
 //            ShowBottomNavigation()
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
     }

@@ -1,7 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id "kotlin-parcelize"
+    id 'com.google.devtools.ksp' version '1.7.0-1.0.6'
 }
+
+//kotlin {
+//    sourceSets {
+//        debug {
+//            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+//        }
+//        release {
+//            kotlin.srcDir("build/generated/ksp/release/kotlin")
+//        }
+//    }
+//}
 
 android {
     namespace 'com.compose.composetext'
@@ -37,11 +50,18 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.1.1'
+        kotlinCompilerExtensionVersion '1.2.0'
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    applicationVariants.all { variant ->
+        kotlin.sourceSets {
+            getByName(variant.name) {
+                kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
+            }
         }
     }
 }
@@ -63,5 +83,9 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout-compose:$constraintLayoutVersion"
     implementation "androidx.compose.runtime:runtime-livedata:$composeLiveDataVersion"
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    // Navigation
+    implementation "io.github.raamcosta.compose-destinations:core:$composeDestinationVersion"
+    ksp "io.github.raamcosta.compose-destinations:ksp:$composeDestinationVersion"
 
 }
