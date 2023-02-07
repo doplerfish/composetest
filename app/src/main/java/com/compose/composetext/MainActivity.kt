@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.compose.composetext.ui.theme.ComposeTestTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -25,6 +26,7 @@ import kotlinx.coroutines.delay
 class MainActivity : ComponentActivity() {
 
     private val effectViewModel: EffectViewModel by viewModels()
+    private val paginationViewModel: PaginationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +39,8 @@ class MainActivity : ComponentActivity() {
 //            ShowBottomNavigation()
 //            DestinationsNavHost(navGraph = NavGraphs.root)
 //            SupportDifferentScreenSizes()
-              MotionLayout()
+//              MotionLayout()
+                ListWithPagination(viewModel = paginationViewModel)
             }
         }
     }
